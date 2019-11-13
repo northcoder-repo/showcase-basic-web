@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+
+<html lang="en-US">
+
+    <head>
+        <title>Title</title>
+    </head>
+
+    <body>
+
+        <!--            -->
+        <!-- Form Title -->
+        <!--            -->
+        <h5 data-th-fragment="formtitle"
+            data-th-replace="/fragments/forms.html :: title-row(
+            ${title.contentType != null} ? ${title.contentType.contentTypeName} : 'unknown type', 
+            ${formTitle})">
+            No Title
+        </h5>
+
+        <!--                      -->
+        <!-- Main Tab - Form Data -->
+        <!--                      -->
+        <form data-th-fragment="formdata"
+              id="title-form" 
+              method="post" 
+              data-th-action="'/title/' + ${title.titleID}">
+
+            <!-- Title ID -->
+            <div data-th-replace="/fragments/forms.html :: input-text-readonly(
+                 id='titleID', 
+                 name='titleID', 
+                 label='Title ID',
+                 value=${title.titleID},
+                 widthPixels=340,
+                 mandatory=true)">
+            </div>
+
+            <!-- Series details -->
+            <div data-th-if="${title.getSeriesDetails()} != ''">
+                <div data-th-replace="/fragments/forms.html :: input-text-readonly(
+                     id='seriesDetails', 
+                     name='seriesDetails', 
+                     label='Series Details',
+                     value=${title.getSeriesDetails()},
+                     widthPixels=340,
+                     mandatory=false)">
+                </div>
+            </div>
+
+            <!-- Primary Title -->
+            <div data-th-replace="/fragments/forms.html :: input-text(
+                 id='primaryTitle', 
+                 name='primaryTitle', 
+                 label='Primary Title',
+                 value=${title.primaryTitle},
+                 widthPixels=420,
+                 mandatory=true)">
+            </div>
+
+            <!-- Original Title -->
+            <div data-th-replace="/fragments/forms.html :: input-text(
+                 id='originalTitle', 
+                 name='originalTitle', 
+                 label='Original Title',
+                 value=${title.originalTitle},
+                 widthPixels=420,
+                 mandatory=false)">
+            </div>
+
+            <!-- Content Type -->
+            <div data-th-replace="/fragments/forms.html :: dropdown-list(
+                 id='contentTypeID',
+                 name='contentTypeID',
+                 label='Content Type',
+                 widthPixels=170,
+                 mandatory=true,
+                 selectedValue=${title.contentTypeID},
+                 dropdownList=${contentTypes},
+                 dropdownListValue='contentTypeID',
+                 dropdownListText='contentTypeName')">
+            </div>
+
+            <!-- Is Adult -->
+            <div data-th-replace="/fragments/forms.html :: input-checkbox(
+                 id='isAdult', 
+                 name='isAdult', 
+                 label='Is Adult',
+                 value=${title.isAdult},
+                 mandatory=false)">
+            </div>
+
+            <!-- Start Year -->
+            <div data-th-replace="/fragments/forms.html :: input-text(
+                 id='startYear', 
+                 name='startYear', 
+                 label='Start Year',
+                 value=${title.startYear},
+                 widthPixels=80,
+                 mandatory=false)">
+            </div>
+
+            <!-- End Year -->
+            <div data-th-replace="/fragments/forms.html :: input-text(
+                 id='endYear', 
+                 name='endYear', 
+                 label='End Year',
+                 value=${title.endYear},
+                 widthPixels=80,
+                 mandatory=false)">
+            </div>
+
+            <!-- Runtime (minutes) -->
+            <div data-th-replace="/fragments/forms.html :: input-text(
+                 id='runtimeMinutes', 
+                 name='runtimeMinutes', 
+                 label='Runtime (mins)',
+                 value=${title.runtimeMinutes},
+                 widthPixels=80,
+                 mandatory=false)">
+            </div>
+
+            <!-- form-buttons -->
+            <div data-th-replace="/fragments/forms.html :: form-buttons(
+                 buttonOne='Save',
+                 buttonTwo='Refresh')">
+            </div>
+
+            <!-- page-refresh -->
+            <div data-th-replace="/fragments/forms.html :: page-refresh">
+            </div>
+
+            <!-- error-handling -->
+            <div data-th-replace="/fragments/forms.html :: error-handling">
+            </div>
+
+        </form>
+
+        <!--                      -->
+        <!-- JSON Tab             -->
+        <!--                      -->
+        <pre data-th-fragment="formjson"
+             data-th-text="${title.getBeanDataAsJson()}">
+        </pre>
+
+        <!--                      -->
+        <!-- Admin Tab             -->
+        <!--                      -->
+        <div data-th-fragment="formadmin">
+
+            <div data-th-replace="/data_table_template.html :: content">
+            </div>
+            <!--
+            <script>
+                $(document).ready(artemDocReady($('#artem-table-id').text()));
+            </script>
+            -->
+
+        </div>
+
+
+    </body>
+
+</html>

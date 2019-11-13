@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+
+<html lang="en-US">
+
+    <head>
+        <title>title</title>
+    </head>
+
+    <body>
+
+        <!-- Content - - - - - - - - - - - - - -- - - - - - - - - - - - - - - - - - - -  -->
+
+        <div data-th-fragment="content" 
+             class="content">
+
+            <!--             -->
+            <!-- Table Title -->
+            <!--             -->
+            <h5 data-th-replace="/fragments/tables.html :: title-row(
+                ${tableTitle})">
+                No Title
+            </h5>
+
+            <div>
+
+                <table data-th-id="${tableType + '_table'}" 
+                       class="display dataTable cell-border"
+                       style="width: 100%;">
+                    
+                    <!-- column headings -->
+                    <thead>
+                        <tr>
+                    <th-block data-th-each="columnHeading : ${columnHeadings}">
+                        <th data-th-text="${columnHeading}">
+                        </th>
+                    </th-block>
+                    </tr>
+                    </thead>
+                    
+                    <!-- data rows -->
+                    <tbody>
+                        <tr data-th-each="resultBean : ${resultBeans}">
+                    <th-block data-th-each="rowValue, iterStat : ${rowValues}">
+                        <td data-th-if="${iterStat.index} == 0">
+                            <a data-th-href="'/' + ${tableType} + '/' + ${resultBean.__${rowValue}__}"
+                               data-th-text="${resultBean.__${rowValue}__}">edit</a>
+                        </td>
+                        <td data-th-if="${iterStat.index} != 0"
+                            data-th-text="${resultBean.__${rowValue}__}">
+                        </td>
+                    </th-block>
+                    </tr>
+                    </tbody>
+                    
+                </table>
+            </div>
+
+            <div id="artem-table-id" style="display: none;" data-th-text="${tableType + '_table'}"></div>
+        </div>
+
+        <script data-th-fragment="script">
+            jQueryUiSetup();
+            $(document).ready(artemDocReady($('#artem-table-id').text()));
+        </script>
+        
+    </body>
+
+</html>

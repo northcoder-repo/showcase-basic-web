@@ -1,0 +1,255 @@
+
+/* ------------------------------------------------ */
+/*                                                  */
+/* main template layout:                            */
+/*                                                  */
+.mainheader {
+    grid-area: header;
+}
+
+.panel {
+    grid-area: sidebar;
+}
+
+.content {
+    grid-area: content;
+}
+
+.mainfooter {
+    grid-area: footer;
+}
+
+.wrapper {
+    width: 100%;
+    max-width: 1200px;
+    margin: 0 auto;
+    display: grid;
+    grid-row-gap: 10px;
+    grid-template-areas:
+        "header"
+        "sidebar"
+        "content"
+        "footer";
+}
+
+.content {
+    color: #606060;
+}
+
+/* ------------------------------------------------ */
+/*                                                  */
+/* media stuff:                                     */
+/*                                                  */
+@media (min-width: 550px) {
+    .wrapper {
+        grid-column-gap: 2em;
+        grid-row-gap: 20px;
+        grid-template-columns: 1fr 4fr;
+        grid-template-areas:
+            "header  header"
+            "sidebar content"
+            "footer footer"
+    }
+}
+
+/* ------------------------------------------------ */
+/*                                                  */
+/* override jQuery UI colors:                       */
+/*                                                  */
+.ui-state-active,
+.ui-widget-content .ui-state-active,
+.ui-widget-header .ui-state-active,
+a.ui-button:active,
+.ui-button:active,
+.ui-button.ui-state-active:hover {
+    letter-spacing: .2rem;
+    font-weight: bold;
+    border: 1px solid #85c2d7;
+    background: #85c2d7;
+}
+
+.ui-accordion .ui-accordion-header,
+.ui-tabs .ui-tabs-nav .ui-tabs-anchor {
+    letter-spacing: .2rem;
+    font-size: 100%;
+}
+
+.ui-accordion .ui-accordion-content {
+    padding: 1em 2.2em 1em 15px;
+}
+
+/* ------------------------------------------------ */
+/*                                                  */
+/* app-specific - flex container, validation        */
+/* errors, etc:                                     */
+/*                                                  */
+.artem-input-container {
+    display: flex;
+    width: 100%;
+    margin-bottom: 5px;
+}
+
+.artem-checkbox-container {
+    display: flex;
+}
+
+input.larger-checkbox { 
+    transform: scale(1.2); 
+    margin-top: 4px;
+} 
+
+.mandatory {
+    color: red;
+}
+
+input,
+textarea {
+    width: 100%;
+    box-sizing: border-box;
+    padding: 10px;
+    margin: 0 10px 10px 10px;
+    outline: none;
+}
+
+select {
+    width: 100%;
+    box-sizing: border-box;
+    padding: 5px 10px;
+    margin: 0 10px 10px 10px;
+    outline: none;
+}
+
+input.readonly,
+textarea.readonly,
+select.readonly {
+    border: 0;
+    padding: 0 10px;
+    margin-top: -9px;
+    margin-bottom: 5px;
+}
+
+textarea {
+    resize: vertical;
+}
+
+.artem-field-icon {
+    height: 20px;
+    margin-top: 8px;
+}
+
+.artem-flex-button-container {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    justify-content: flex-start;
+    align-items: center;
+}
+
+.artem-flex-label-container {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    justify-content: flex-start;
+}
+
+.artem-flex-button-container > div {
+    padding: 0 15px 0 0;
+}
+
+.artem-flex-item {
+    flex-grow: 1;
+    flex-shrink: 2;
+    flex-basis: auto;
+}
+
+label {
+    color: #808080;
+}
+
+.menu-item {
+    margin: 5px 0;
+}
+
+div.artem-button-icon {
+    padding-left: 4px;
+    padding-bottom: 4px;
+}
+
+.artem-icon > img {
+    height: 20px;
+}
+
+.artem-field-error-msg {
+    color: #c84d4d;
+    padding: 0 0 0 21px;
+    position: relative;
+    top: -12px;
+}
+
+.artem-form-error-msg {
+    color: #c84d4d;
+    padding: 0 0 0 10px;
+    position: relative;
+    top: -5px;
+}
+
+input.artem-invalid-data-field,
+select.artem-invalid-data-field,
+textarea.artem-invalid-data-field {
+    border: 2px solid #d37171;
+    box-shadow: 2px 3px 4px 0 rgba(200, 77, 77, 0.15);
+}
+
+tbody {
+    font-size: 0.9em;
+}
+
+/* ------------------------------------------------ */
+/*                                                  */
+/* stuff for datatables layout                      */
+/*                                                  */
+.artem-data-table-ctls-wrapper {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    justify-content: flex-start;
+    align-items: center;
+    margin-top: 20px;
+}
+
+table.dataTable {
+    border-collapse: collapse;
+}
+
+table.dataTable tr {
+    line-height: 16px;
+}
+
+div.dataTables_paginate a {
+    padding: 0 10px;
+    cursor: pointer;
+}
+
+.dataTables_filter {
+    margin-left: auto;
+}
+
+.dataTables_length select,
+.dataTables_filter input {
+    margin: 0 5px; 
+    padding: 0 5px; 
+    position:relative; 
+    bottom: 8px;
+}
+
+.dataTables_length label,
+.dataTables_filter label {
+    display: inline-flex; 
+    font-weight: normal;
+}
+
+.dataTables_wrapper 
+.dataTables_paginate 
+.paginate_button {
+    padding: 0;
+}

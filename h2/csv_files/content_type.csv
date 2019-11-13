@@ -1,0 +1,11 @@
+content_type_id,content_type_name
+1,short
+2,movie
+3,TV Movie
+4,TV Series
+5,TV Episode
+6,TV Short
+7,TV MiniSeries
+8,TV Special
+9,video
+10,videoGame

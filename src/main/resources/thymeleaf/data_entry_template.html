@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+
+<html lang="en-US">
+
+    <head>
+        <title>title</title>
+    </head>
+
+    <body>
+
+        <!-- Content - - - - - - - - - - - - - -- - - - - - - - - - - - - - - - - - - -  -->
+
+        <div data-th-fragment="content" 
+             class="content">
+
+            <!--             -->
+            <!-- Table Title -->
+            <!--             -->
+            <h5 data-th-replace="${formTemplate} :: formtitle">
+                No Title
+            </h5>
+
+            <!-- Tabs - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -  -->
+
+            <div id="tabs">
+                <ul>
+                    <li><a href="#tab-01" data-th-text="${tabLabels[0]}"></a></li>
+                    <li><a href="#tab-02" data-th-text="${tabLabels[1]}"></a></li>
+                    <li><a href="#tab-03" data-th-text="${tabLabels[2]}"></a></li>
+                    <li><a href="#tab-04" data-th-text="${tabLabels[3]}"></a></li>
+                </ul>
+
+                <div id="tab-01">
+                    <form data-th-replace="${formTemplate} :: formdata">
+                    </form>
+                </div>
+
+                <div id="tab-02">
+                    <div data-th-replace="${formTemplate} :: formadmin">
+                        no admin
+                    </div>
+                </div>
+
+                <div id="tab-03">
+                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor 
+                        incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis 
+                        nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. 
+                        Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore 
+                        eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, 
+                        sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+                </div>
+
+                <div id="tab-04">
+                    <pre data-th-replace="${formTemplate} :: formjson">
+                            no json
+                    </pre>
+                </div>
+
+            </div>
+
+        </div>
+
+        <script data-th-fragment="script">
+            jQueryUiSetup();
+        </script>
+
+    </body>
+
+</html>

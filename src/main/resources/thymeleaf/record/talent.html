@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+
+<html lang="en-US">
+
+    <head>
+        <title>Talent</title>
+    </head>
+
+    <body>
+
+        <!--            -->
+        <!-- Form Title -->
+        <!--            -->
+        <h5 data-th-fragment="formtitle"
+            data-th-replace="/fragments/forms.html :: title-row(
+            'Name', 
+            ${formTitle})">
+            No Title
+        </h5>
+
+        <!--                      -->
+        <!-- Main Tab - Form Data -->
+        <!--                      -->
+        <form data-th-fragment="formdata"
+              id="talent-form" 
+              method="post" 
+              data-th-action="'/talent/' + ${talent.talentID}">
+
+            <!-- Talent ID -->
+            <div data-th-replace="/fragments/forms.html :: input-text-readonly(
+                 id='talentID', 
+                 name='talentID', 
+                 label='Talent ID',
+                 value=${talent.talentID},
+                 widthPixels=340,
+                 mandatory=true)">
+            </div>
+
+            <!-- Talent Name -->
+            <div data-th-replace="/fragments/forms.html :: input-text(
+                 id='talentName', 
+                 name='talentName', 
+                 label='Talent Name',
+                 value=${talent.talentName},
+                 widthPixels=420,
+                 mandatory=true)">
+            </div>
+
+            <!-- Birth Year -->
+            <div data-th-replace="/fragments/forms.html :: input-text(
+                 id='birthYear', 
+                 name='birthYear', 
+                 label='Year of Birth',
+                 value=${talent.birthYear},
+                 widthPixels=80,
+                 mandatory=false)">
+            </div>
+
+            <!-- Death Year -->
+            <div data-th-replace="/fragments/forms.html :: input-text(
+                 id='deathYear', 
+                 name='deathYear', 
+                 label='Year of Death',
+                 value=${talent.deathYear},
+                 widthPixels=80,
+                 mandatory=false)">
+            </div>
+
+            <!-- form-buttons -->
+            <div data-th-replace="/fragments/forms.html :: form-buttons(
+                 buttonOne='Save',
+                 buttonTwo='Refresh')">
+            </div>
+
+            <!-- page-refresh -->
+            <div data-th-replace="/fragments/forms.html :: page-refresh">
+            </div>
+
+            <!-- error-handling -->
+            <div data-th-replace="/fragments/forms.html :: error-handling">
+            </div>
+
+        </form>
+
+        <!--                      -->
+        <!-- JSON Tab             -->
+        <!--                      -->
+        <pre data-th-fragment="formjson"
+             data-th-text="${talent.getBeanDataAsJson()}">
+        </pre>
+
+        <!--                      -->
+        <!-- Admin Tab             -->
+        <!--                      -->
+        <div data-th-fragment="formadmin">
+
+            <div data-th-replace="/data_table_template.html :: content">
+            </div>
+            <!--
+            <script>
+                $(document).ready(artemDocReady($('#artem-table-id').text()));
+            </script>
+            -->
+
+        </div>
+
+
+    </body>
+
+</html>

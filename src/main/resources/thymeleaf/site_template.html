@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+
+<html lang="en-US">
+
+    <head data-th-replace="/fragments/head.html :: page-head(${headTitle})">
+        <title>title</title>
+    </head>
+
+    <body>
+        <div class="wrapper">
+
+            <!-- Header - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
+            <header class="mainheader">
+                <h4>Demo Web Site - Using IMDb Data</h4>
+            </header>
+
+            <!-- Left Nav Panel - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
+            <div data-th-replace="/fragments/left_menu.html :: left-menu">
+            </div>
+
+            <!-- Content - - - - - - - - - - - - - -- - - - - - - - - - - - - - - - - - - - -->
+            <div data-th-replace="${contentTemplate} :: content"
+                 class="content">
+            </div>
+
+            <!-- Footer - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
+            <footer class="mainfooter">
+                <div style="text-align: center; font-size: smaller;">
+                    <div style="display: inline-block;">Copyright: &copy; andrewtee<br>License: 
+                        <a href="https://choosealicense.com/licenses/gpl-3.0/" target="_blank">
+                            GNU General Public License v3.0
+                        </a>
+                    </div>
+                </div>
+            </footer>
+
+        </div>
+
+        <script data-th-replace="${contentTemplate} :: script">
+        </script>
+
+    </body>
+
+</html>
