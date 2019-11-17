@@ -112,12 +112,12 @@ function artemDocReady(tableName) {
     // The below Unicode range covers only the most common (Latin alphabet)
     // diacritic marks - it is not comprehensive. The regex \p{Mark} does
     // not appear to be supported sufficiently across browser implementations.
-    $('#' + tableName + '_filter input').keyup(function () {
-// let regex = /\p{Mark}/ug; - not widely implemented?
-// As an alternative, the below extension...
-// jQuery.fn.DataTable.ext.type.search.string(this.value);
-// ...is from here:
-// https://cdn.datatables.net/plug-ins/1.10.19/filtering/type-based/diacritics-neutralise.js
+    $('#' + tableName + '_filter input').off().keyup(function () {
+        // let regex = /\p{Mark}/ug; - not widely implemented?
+        // As an alternative, the below extension...
+        // jQuery.fn.DataTable.ext.type.search.string(this.value);
+        // ...is from here:
+        // https://cdn.datatables.net/plug-ins/1.10.19/filtering/type-based/diacritics-neutralise.js
         var newval = splitLigatures(this.value.normalize("NFD").replace(/[\u0300-\u036f]/g, ""));
         sessionStorage.artemSearchTerm = newval;
         table.search(newval).draw();
