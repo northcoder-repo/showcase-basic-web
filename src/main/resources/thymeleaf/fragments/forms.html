@@ -2,227 +2,164 @@
 
 <html>
 
-    <!--                                                                           -->
-    <!-- Thymeleaf Templates                                                       -->
-    <!--                                                                           -->
-    <!-- A collection of widget fragments, used to build form fields, titles, etc. -->
-    <!-- Various values are passed into these fragments, from the calling html     -->
-    <!-- pages, or are derived in the fragments, including the following:          -->
-    <!--                                                                           -->
+<!--                                                                           -->
+<!-- Thymeleaf Templates                                                       -->
+<!--                                                                           -->
+<!-- A collection of widget fragments, used to build form fields, titles, etc. -->
+<!-- Various values are passed into these fragments, from the calling html     -->
+<!-- pages, or are derived in the fragments, including the following:          -->
+<!--                                                                           -->
 
-    <head >
-        <title>Title</title>
-        <meta charset="UTF-8">
-    </head>
+<head>
+  <title>Title</title>
+  <meta charset="UTF-8">
+</head>
 
-    <body>
+<body>
 
-        <!--                             -->
-        <!-- title-row                   -->
-        <!--                             -->
-        <div data-th-fragment="title-row(titlePrefix, formTitle)"
-             class="artem-head-title">
-            <h5 data-th-utext="'<i>' + ${titlePrefix} + ':</i> &nbsp;' 
+  <!--                             -->
+  <!-- title-row                   -->
+  <!--                             -->
+  <div data-th-fragment="title-row(titlePrefix, formTitle)" class="artem-head-title">
+    <h5 data-th-utext="'<i>' + ${titlePrefix} + ':</i> &nbsp;'
                 + (${formTitle}?: '[no name]')">[no name]
-            </h5>
-        </div>
+    </h5>
+  </div>
 
-        <!--                             -->
-        <!-- input-text-readonly         -->
-        <!--                             -->
-        <div data-th-fragment="input-text-readonly(id, name, label, value, widthPixels, mandatory)" 
-             data-th-with="width=${widthPixels} > 500 ? 500 : ${widthPixels}"
-             data-th-id="${id} + '-row'">
-            <div class="artem-flex-label-container">
-                <label data-th-for="${id}"
-                       data-th-text="${label}">label
-                </label>
-                <span data-th-if="${mandatory}" 
-                      class="mandatory" 
-                      data-th-text="'&nbsp;*'">
-                </span>
-            </div>
-            <div class="artem-input-container">
-                <input class="artem-input-field readonly"
-                       type="text"
-                       readonly="readonly"
-                       data-th-id="${id}"
-                       data-th-name="${name}"
-                       data-th-value="${value}"
-                       data-th-style="'max-width: ' + ${width} + 'px;'">
-                <img class="artem-field-icon" style="display: none;" src="/images/cross.svg">
-            </div>
-            <div class="artem-field-error-msg"></div>
-        </div>
+  <!--                             -->
+  <!-- input-text-readonly         -->
+  <!--                             -->
+  <div data-th-fragment="input-text-readonly(id, name, label, value, widthPixels, mandatory)" data-th-with="width=${widthPixels} > 500 ? 500 : ${widthPixels}" data-th-id="${id} + '-row'">
+    <div class="artem-flex-label-container">
+      <label data-th-for="${id}" data-th-text="${label}">label
+      </label>
+      <span data-th-if="${mandatory}" class="mandatory" data-th-text="'&nbsp;*'">
+      </span>
+    </div>
+    <div class="artem-input-container">
+      <input class="artem-input-field readonly" type="text" readonly="readonly" data-th-id="${id}" data-th-name="${name}" data-th-value="${value}" data-th-style="'max-width: ' + ${width} + 'px;'">
+      <img class="artem-field-icon" style="display: none;" src="/images/cross.svg">
+    </div>
+    <div class="artem-field-error-msg"></div>
+  </div>
 
-        <!--                             -->
-        <!-- input-text-hidden           -->
-        <!--                             -->
-        <div data-th-fragment="input-text-hidden(name, value)">
-            <input type="text"
-                   data-th-name="${name}"
-                   data-th-value="${value}"
-                   data-th-style="'display: none;'">
-        </div>
+  <!--                             -->
+  <!-- input-text-hidden           -->
+  <!--                             -->
+  <div data-th-fragment="input-text-hidden(name, value)">
+    <input type="text" data-th-name="${name}" data-th-value="${value}" data-th-style="'display: none;'">
+  </div>
 
-        <!--                             -->
-        <!-- input-text (read/write)     -->
-        <!--                             -->
-        <div data-th-fragment="input-text(id, name, label, value, widthPixels, mandatory)" 
-             data-th-with="width=${widthPixels} > 500 ? 500 : ${widthPixels}"
-             data-th-id="${id} + '-row'">
-            <div class="artem-flex-label-container">
-                <label data-th-for="${id}"
-                       data-th-text="${label}">label
-                </label>
-                <span data-th-if="${mandatory}" 
-                      class="mandatory" 
-                      data-th-text="'&nbsp;*'">
-                </span>
-            </div>
-            <div class="artem-input-container">
-                <input class="artem-input-field"
-                       type="text"
-                       data-th-id="${id}"
-                       data-th-name="${name}"
-                       data-th-value="${value}"
-                       data-th-style="'max-width: ' + ${width} + 'px;'">
-                <img class="artem-field-icon" style="display: none;" src="/images/cross.svg">
-            </div>
-            <div class="artem-field-error-msg"></div>
-        </div>
+  <!--                             -->
+  <!-- input-text (read/write)     -->
+  <!--                             -->
+  <div data-th-fragment="input-text(id, name, label, value, widthPixels, mandatory)" data-th-with="width=${widthPixels} > 500 ? 500 : ${widthPixels}" data-th-id="${id} + '-row'">
+    <div class="artem-flex-label-container">
+      <label data-th-for="${id}" data-th-text="${label}">label
+      </label>
+      <span data-th-if="${mandatory}" class="mandatory" data-th-text="'&nbsp;*'">
+      </span>
+    </div>
+    <div class="artem-input-container">
+      <input class="artem-input-field" type="text" data-th-id="${id}" data-th-name="${name}" data-th-value="${value}" data-th-style="'max-width: ' + ${width} + 'px;'">
+      <img class="artem-field-icon" style="display: none;" src="/images/cross.svg">
+    </div>
+    <div class="artem-field-error-msg"></div>
+  </div>
 
-        <!--                             -->
-        <!-- dropdown-list               -->
-        <!--                             -->
-        <div data-th-fragment="dropdown-list(id, name, label, widthPixels, mandatory,
-             selectedValue, dropdownList, dropdownListValue, dropdownListText)"
-             data-th-with="width=${widthPixels} > 500 ? 500 : ${widthPixels}"
-             data-th-id="${id} + '-row'">
-            <div class="artem-flex-label-container">
-                <label data-th-for="${id}"
-                       data-th-text="${label}">label
-                </label>
-                <span data-th-if="${mandatory}" 
-                      class="mandatory" 
-                      data-th-text="'&nbsp;*'">
-                </span>
-            </div>
-            <div class="artem-input-container">
-                <select class="artem-input-field"
-                        data-th-id="${id}"
-                        data-th-name="${name}"
-                        data-th-style="'width: ' + ${width} + 'px;'">
-                    <option selected value></option>
-                    <option data-th-each="item : ${dropdownList}" 
-                            data-th-value="${item.__${dropdownListValue}__}" 
-                            data-th-text="${item.__${dropdownListText}__}"
-                            data-th-selected="${item.__${dropdownListValue}__} == ${selectedValue}">
-                    </option>
-                </select>
-                <img class="artem-field-icon" style="display: none;" src="/images/cross.svg">
-            </div>
-            <div class="artem-field-error-msg"></div>
-        </div>
+  <!--                             -->
+  <!-- dropdown-list               -->
+  <!--                             -->
+  <div data-th-fragment="dropdown-list(id, name, label, widthPixels, mandatory,
+             selectedValue, dropdownList, dropdownListValue, dropdownListText)" data-th-with="width=${widthPixels} > 500 ? 500 : ${widthPixels}" data-th-id="${id} + '-row'">
+    <div class="artem-flex-label-container">
+      <label data-th-for="${id}" data-th-text="${label}">label
+      </label>
+      <span data-th-if="${mandatory}" class="mandatory" data-th-text="'&nbsp;*'">
+      </span>
+    </div>
+    <div class="artem-input-container">
+      <select class="artem-input-field" data-th-id="${id}" data-th-name="${name}" data-th-style="'width: ' + ${width} + 'px;'">
+        <option selected value></option>
+        <option data-th-each="item : ${dropdownList}" data-th-value="${item.__${dropdownListValue}__}" data-th-text="${item.__${dropdownListText}__}" data-th-selected="${item.__${dropdownListValue}__} == ${selectedValue}">
+        </option>
+      </select>
+      <img class="artem-field-icon" style="display: none;" src="/images/cross.svg">
+    </div>
+    <div class="artem-field-error-msg"></div>
+  </div>
 
-        <!--                                -->
-        <!-- input-checkbox SINGLE!         -->
-        <!--                                -->
-        <!-- Does not handle an array of    -->
-        <!-- related checkboxes.            -->
-        <!--                                -->
-        <!-- 'value' = 1 -> true/checked    -->
-        <!-- 'value' = 0 -> false/unchecked -->
-        <!--                                -->
-        <div data-th-fragment="input-checkbox(id, name, label, value, mandatory)" 
-             data-th-id="${id} + '-row'">
-            <div class="artem-flex-label-container">
-                <div class="artem-flex-label-container">
-                    <label data-th-for="${id}"
-                           data-th-text="${label}">label
-                    </label>
-                    <span data-th-if="${mandatory}" 
-                          class="mandatory" 
-                          data-th-text="'&nbsp;*'">
-                    </span>
-                </div>
-                <div class="artem-checkbox-container">
-                    <input class="artem-input-field larger-checkbox"
-                           data-th-onclick="'handleCheckBoxState(this);'"
-                           type="checkbox"
-                           data-th-id="${id} + '-dummy'"
-                           data-th-name="${name} + '-dummy'"
-                           data-th-value="${value}"
-                           data-th-checked="${value}">
-                    <img class="artem-field-icon" style="display: none;" src="/images/cross.svg">
-                </div>
-            </div>
-            <div class="artem-field-error-msg"></div>
-            <!-- Ensures a value is always submitted in the form. -->
-            <!-- Its value is set by the above onclick event.     -->
-            <input type="checkbox" style="display: none;"
-                   data-th-id="${id}"
-                   data-th-name="${name}"
-                   data-th-value="${value}"
-                   data-th-checked="true">
-        </div>
+  <!--                                -->
+  <!-- input-checkbox SINGLE!         -->
+  <!--                                -->
+  <!-- Does not handle an array of    -->
+  <!-- related checkboxes.            -->
+  <!--                                -->
+  <!-- 'value' = 1 -> true/checked    -->
+  <!-- 'value' = 0 -> false/unchecked -->
+  <!--                                -->
+  <div data-th-fragment="input-checkbox(id, name, label, value, mandatory)" data-th-id="${id} + '-row'">
+    <div class="artem-flex-label-container">
+      <div class="artem-flex-label-container">
+        <label data-th-for="${id}" data-th-text="${label}">label
+        </label>
+        <span data-th-if="${mandatory}" class="mandatory" data-th-text="'&nbsp;*'">
+        </span>
+      </div>
+      <div class="artem-checkbox-container">
+        <input class="artem-input-field larger-checkbox" data-th-onclick="'handleCheckBoxState(this);'" type="checkbox" data-th-id="${id} + '-dummy'" data-th-name="${name} + '-dummy'" data-th-value="${value}" data-th-checked="${value}">
+        <img class="artem-field-icon" style="display: none;" src="/images/cross.svg">
+      </div>
+    </div>
+    <div class="artem-field-error-msg"></div>
+    <!-- Ensures a value is always submitted in the form. -->
+    <!-- Its value is set by the above onclick event.     -->
+    <input type="checkbox" style="display: none;" data-th-id="${id}" data-th-name="${name}" data-th-value="${value}" data-th-checked="true">
+  </div>
 
-        <!--                             -->
-        <!-- form-buttons               -->
-        <!--                             -->
-        <div data-th-fragment="form-buttons(buttonOne, buttonTwo)">
-            <div class="artem-flex-button-container">
-                <div>
-                    <input class="button-primary"
-                           data-th-value="${buttonOne}"
-                           type="submit">
-                </div>
-                <div class="artem-icon artem-button-icon">
-                    <img id="artem-form-check-icon" 
-                         class="artem-icon" 
-                         style="display: none;" 
-                         src="/images/check.svg">
-                    <img id="artem-form-cross-icon" 
-                         class="artem-icon" 
-                         style="display: none;" 
-                         src="/images/cross.svg">
-                </div>
-                <div style="margin-left: auto;">
-                    <input class="button" 
-                           data-th-value="${buttonTwo}"
-                           type="button" 
-                           onclick="refreshPage();">
-                </div>
-            </div>
-            <div id="artem-form-error-msg" 
-                 class="artem-form-error-msg"></div>
-        </div>
+  <!--                             -->
+  <!-- form-buttons               -->
+  <!--                             -->
+  <div data-th-fragment="form-buttons(buttonOne, buttonTwo)">
+    <div class="artem-flex-button-container">
+      <div>
+        <input class="button-primary" data-th-value="${buttonOne}" type="submit">
+      </div>
+      <div class="artem-icon artem-button-icon">
+        <img id="artem-form-check-icon" class="artem-icon" style="display: none;" src="/images/check.svg">
+        <img id="artem-form-cross-icon" class="artem-icon" style="display: none;" src="/images/cross.svg">
+      </div>
+      <div style="margin-left: auto;">
+        <input class="button" data-th-value="${buttonTwo}" type="button" onclick="refreshPage();">
+      </div>
+    </div>
+    <div id="artem-form-error-msg" class="artem-form-error-msg"></div>
+  </div>
 
-        <!--                             -->
-        <!-- page-refresh                -->
-        <!--                             -->
-        <div data-th-fragment="page-refresh">
-            <div id="refreshUrl" style="display: none;" data-th-text="${ctx.path()}"></div>
-            <script data-th-inline="javascript">
-                function refreshPage() {
-                    window.location.href = $('#refreshUrl').text();
-                }
-            </script>
-        </div>
+  <!--                             -->
+  <!-- page-refresh                -->
+  <!--                             -->
+  <div data-th-fragment="page-refresh">
+    <div id="refreshUrl" style="display: none;" data-th-text="${ctx.path()}"></div>
+    <script data-th-inline="javascript">
+      function refreshPage() {
+        window.location.href = $('#refreshUrl').text();
+      }
+    </script>
+  </div>
 
-        <!--                             -->
-        <!-- error-handling              -->
-        <!--                             -->
-        <div data-th-fragment="error-handling">
-            <div id="sqlError" style="display: none;" data-th-text="${daoData.dbErrorMessage}"></div>
-            <div id="actionCompletedOK" style="display: none;" data-th-text="${daoData.resultBean.actionCompletedOK}"></div>
-            <div id="errors" style="display: none;" data-th-text="${daoData.resultBean.getFormValidationErrorsAsJson()}"></div>
-            <script data-th-inline="javascript">
-                handleFormErrors($('#sqlError').text(), $('#actionCompletedOK').text(), $('#errors').text());
-            </script>
-        </div>
+  <!--                             -->
+  <!-- error-handling              -->
+  <!--                             -->
+  <div data-th-fragment="error-handling">
+    <div id="sqlError" style="display: none;" data-th-text="${daoData.dbErrorMessage}"></div>
+    <div id="errors" style="display: none;" data-th-text="${daoData.resultBean.getFormValidationErrorsAsJson()}"></div>
+    <script data-th-inline="javascript">
+      handleFormErrors($('#sqlError').text(), $('#errors').text());
+    </script>
+  </div>
 
 
-    </body>
+</body>
 
 </html>

@@ -12,7 +12,7 @@ import org.apache.logging.log4j.core.config.Configurator;
  * Handles automatic logging of all HTTP requests, and formatting of log messages.
  */
 public class LoggerUtils {
-    
+
     public static Logger LOGGER = LogManager.getRootLogger();
 
     public static void logHttpRequest(HttpServletRequest req, HttpServletResponse resp, float millis) {
@@ -44,12 +44,12 @@ public class LoggerUtils {
         // decode from a number (e.g. 200) to a description (e.g. "OK").
         return Enums.getIfPresent(HttpStatus.class,
                 String.format("_%s", status))
-                .or(HttpStatus.UNKNOWN).getStatus();
+                .or(HttpStatus.UNKNOWN).getStatusName();
     }
-    
+
     private static void changeLogLevel(Level level) {
         // TODO - implement this!
         Configurator.setAllLevels(LogManager.getRootLogger().getName(), level);
     }
-    
+
 }

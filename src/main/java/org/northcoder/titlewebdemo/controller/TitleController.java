@@ -10,6 +10,7 @@ import static org.northcoder.titlewebdemo.Path._Title.*;
 import org.northcoder.titlewebdemo.beans.Title;
 import org.northcoder.titlewebdemo.beans.ContentType;
 import org.northcoder.titlewebdemo.beans.TalentInTitle;
+import org.northcoder.titlewebdemo.util.HttpStatus;
 
 /**
  * See the Title bean.
@@ -36,12 +37,13 @@ public class TitleController extends Controller {
         DaoData<Title> daoData = updateOneRecord(ctx.body(), Title.SQL_UPDATE_BY_ID,
                 new Title());
         if (daoData.getResultBean().getActionCompletedOK()) {
-            // Safeguard: re-select the record, in case of additional DB-triggered updates:
-            Title selectBindParams = new Title(daoData.getResultBean().getTitleID());
-            daoData = fetchOneRecord(selectBindParams, Title.SQL_SELECT_BY_ID);
-            daoData.getResultBean().setActionCompletedOK(true);
+            // doing a post-redirect-get, this is the redirect:
+            ctx.redirect(String.format("%s?result=ok", ctx.path()),
+                HttpStatus._303.getStatusCode());
+        } else {
+            // return original data with errors:
+            ctx.render(SITE_TEMPLATE, buildFormModel(ctx, daoData));
         }
-        ctx.render(SITE_TEMPLATE, buildFormModel(ctx, daoData));
     };
 
     private static Map<String, Object> buildTableModel(Context ctx, DaoData<Title> daoData) {

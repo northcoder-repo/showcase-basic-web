@@ -15,7 +15,7 @@ function jQueryUiSetup() {
                     .tabs("option", "active");
         }
     });
-    // Activate jQuery UI accordion - left-hand nav. 
+    // Activate jQuery UI accordion - left-hand nav.
     // Also remember its state across sessions:
     var activeAccordion = localStorage.artemActiveAccordion ?
             parseInt(localStorage.artemActiveAccordion) : false;
@@ -32,7 +32,7 @@ function jQueryUiSetup() {
 
 // Process any validation errors and/or action outcomes,
 // resulting from server-side processing of html form data.
-function handleFormErrors(sqlError, actionCompletedOK, errors) {
+function handleFormErrors(sqlError, errors) {
     $(document).ready(function () {
         // data validation errors (hibernate validators):
         if (errors) {
@@ -47,8 +47,13 @@ function handleFormErrors(sqlError, actionCompletedOK, errors) {
         // database errors - e.g. FK or unique index constraints:
         if (sqlError) {
             showFormLevelError(sqlError);
-        } else if (actionCompletedOK === 'true') {
-            $('#' + 'artem-form-check-icon').show();
+        } else {
+            // A status of OK is indicated by a GET query parameter
+            // at the end of the POST-redirect-GET cycle:
+            var queryString = location.search;
+            if (queryString && queryString.includes('result=ok')) {
+                $('#' + 'artem-form-check-icon').show();
+            }
         }
     });
 }
@@ -90,7 +95,7 @@ function artemDocReady(tableName) {
         "pageLength": pageLength, // re-apply previously used page length
         "columnDefs": [
             {
-                "visible": false, // hidden col - contains search data 
+                "visible": false, // hidden col - contains search data
                 "targets": [-1]   // -1 means the final column in the table
             }
         ],
@@ -107,7 +112,7 @@ function artemDocReady(tableName) {
     });
     // Remove diacritics from search input, so that we can match things
     // like "église" with "eglise". Note we also have to remove diacritics
-    // from the data to be searched.  That is done on the server - the 
+    // from the data to be searched.  That is done on the server - the
     // results are stored in an extra hidden searchable table column.
     // The below Unicode range covers only the most common (Latin alphabet)
     // diacritic marks - it is not comprehensive. The regex \p{Mark} does
@@ -160,7 +165,7 @@ function doAfterTableInitComplete(table, tableName) {
 
 // Used to support form checkboxes.  Ensures a value
 // is always submitted in a form, even for unchecked
-// checkboxes. See the Thymeleaf 'input-checkbox' 
+// checkboxes. See the Thymeleaf 'input-checkbox'
 // fragment in forms.html.
 function handleCheckBoxState(field) {
     var tgtFieldID = '#' + field.name.substring(0, field.name.length - 6);
