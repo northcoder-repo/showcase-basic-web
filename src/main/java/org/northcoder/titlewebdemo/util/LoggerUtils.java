@@ -12,8 +12,8 @@ import org.apache.logging.log4j.core.config.Configurator;
  * Handles automatic logging of all HTTP requests, and formatting of log messages.
  */
 public class LoggerUtils {
-
-    public static Logger LOGGER = LogManager.getRootLogger();
+    
+    public static final Logger LOGGER = LogManager.getRootLogger();
 
     public static void logHttpRequest(HttpServletRequest req, HttpServletResponse resp, float millis) {
         String logMessage = getHttpRequestLogMessage(req, resp, millis, decodeHttpStatus(resp.getStatus()));
@@ -46,10 +46,10 @@ public class LoggerUtils {
                 String.format("_%s", status))
                 .or(HttpStatus.UNKNOWN).getStatusName();
     }
-
-    private static void changeLogLevel(Level level) {
+    
+    //private static void changeLogLevel(Level level) {
         // TODO - implement this!
-        Configurator.setAllLevels(LogManager.getRootLogger().getName(), level);
-    }
-
+        //Configurator.setAllLevels(LogManager.getRootLogger().getName(), level);
+    //}
+    
 }

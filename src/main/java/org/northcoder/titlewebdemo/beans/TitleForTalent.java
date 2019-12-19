@@ -3,6 +3,8 @@ package org.northcoder.titlewebdemo.beans;
 import com.google.gson.annotations.SerializedName;
 import java.util.Arrays;
 import java.util.List;
+import org.apache.commons.lang3.builder.EqualsBuilder;
+import org.apache.commons.lang3.builder.HashCodeBuilder;
 import org.jdbi.v3.core.mapper.reflect.ColumnName;
 import org.northcoder.titlewebdemo.util.Utils;
 
@@ -220,4 +222,40 @@ public class TitleForTalent extends DemoBean implements Comparable<TitleForTalen
         }
         return 0;
     }
+    
+    // Based on the PK of the underlying tables, but also taking account
+    // of season/episode data:
+    @Override
+    public int hashCode() {
+        return new HashCodeBuilder(41, 59)
+                .append(talentID)
+                .append(titleID)
+                .append(startYear)
+                .append(seasonNumber)
+                .append(episodeCount)
+                .toHashCode();
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (obj == null) {
+            return false;
+        }
+        if (obj == this) {
+            return true;
+        }
+        if (obj.getClass() != getClass()) {
+            return false;
+        }
+        TitleForTalent other = (TitleForTalent) obj;
+        return new EqualsBuilder()
+                .appendSuper(super.equals(obj))
+                .append(talentID, other.talentID)
+                .append(titleID, other.titleID)
+                .append(startYear, other.startYear)
+                .append(seasonNumber, other.seasonNumber)
+                .append(episodeCount, other.episodeCount)
+                .isEquals();
+    }
+    
 }

@@ -79,7 +79,7 @@ public class StringCleanser {
                 .trim();
 
         if (!cleansed.equals(input)) {
-            LoggerUtils.LOGGER.info(String.format("Input was cleansed:\nBefore: [%s]\nAfter : [%s].",
+            LoggerUtils.LOGGER.info(String.format("Input was cleansed:%nBefore: [%s]%nAfter : [%s].",
                     input, cleansed));
         }
 

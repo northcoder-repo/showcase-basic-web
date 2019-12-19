@@ -78,7 +78,7 @@ public class DemoSessionHandler {
         try {
             encodedValue = URLEncoder.encode(unencodedValue, StandardCharsets.UTF_8.displayName());
         } catch (UnsupportedEncodingException ex) {
-            LoggerUtils.LOGGER.error(String.format("Error URL-encoding the following text: [%s]", encodedValue), ex);
+            LoggerUtils.LOGGER.error(String.format("Error URL-encoding the following text: [%s]", unencodedValue), ex);
         }
         return encodedValue;
     }

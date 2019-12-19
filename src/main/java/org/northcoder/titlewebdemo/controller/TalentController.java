@@ -19,19 +19,19 @@ public class TalentController extends Controller {
         super();
     }
 
-    public static Handler fetchOne = (ctx) -> {
+    public static final Handler fetchOne = (ctx) -> {
         Talent bindParams = new Talent(ctx.pathParam(DB_KEY));
         DaoData<Talent> daoData = fetchOneRecord(bindParams, Talent.SQL_SELECT_BY_ID);
         ctx.render(SITE_TEMPLATE, buildFormModel(ctx, daoData));
     };
 
-    public static Handler fetchAll = (ctx) -> {
+    public static final Handler fetchAll = (ctx) -> {
         Talent bindParams = new Talent();
         DaoData<Talent> daoData = fetchAllRecords(bindParams, Talent.SQL_SELECT_ALL);
         ctx.render(SITE_TEMPLATE, buildTableModel(ctx, daoData));
     };
 
-    public static Handler updateOne = (ctx) -> {
+    public static final Handler updateOne = (ctx) -> {
         DaoData<Talent> daoData = updateOneRecord(ctx.body(), Talent.SQL_UPDATE_BY_ID,
                 new Talent());
         if (daoData.getResultBean().getActionCompletedOK()) {

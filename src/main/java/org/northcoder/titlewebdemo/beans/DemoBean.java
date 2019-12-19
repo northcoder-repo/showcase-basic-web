@@ -22,7 +22,7 @@ public abstract class DemoBean {
 
     private transient List<ValidationError> formValidationErrors = new ArrayList();
         
-    private transient String sql;
+    //private transient String sql;
     
     public List<ValidationError> getFormValidationErrors() {
         return formValidationErrors;

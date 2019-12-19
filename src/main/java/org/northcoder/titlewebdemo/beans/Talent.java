@@ -7,6 +7,8 @@ import java.util.List;
 import javax.annotation.Nullable;
 import javax.validation.constraints.Digits;
 import javax.validation.constraints.Size;
+import org.apache.commons.lang3.builder.EqualsBuilder;
+import org.apache.commons.lang3.builder.HashCodeBuilder;
 import org.hibernate.validator.constraints.Range;
 import org.jdbi.v3.core.mapper.reflect.ColumnName;
 import org.northcoder.titlewebdemo.util.Utils;
@@ -42,7 +44,7 @@ public class Talent extends DemoBean implements Comparable<Talent> {
 
     public static final String SQL_SELECT_BY_ID = String.join(" ",
             SQL_SELECT_ALL, "where talent_id = :talentID");
-    
+
     public static final String SQL_UPDATE_BY_ID = String.join(" ",
             "update imdb.talent set talent_name = :talentName,",
             "birth_year = :birthYear,",
@@ -76,7 +78,7 @@ public class Talent extends DemoBean implements Comparable<Talent> {
 
     @SerializedName("titles")
     private final List<TitleForTalent> titleListForTalent = new ArrayList();
-    
+
     public String getTalentID() {
         return talentID;
     }
@@ -112,12 +114,12 @@ public class Talent extends DemoBean implements Comparable<Talent> {
     public List<TitleForTalent> getTitleListForTalent() {
         return titleListForTalent;
     }
-    
+
     public String getSearchData() {
         return Utils.buildExtraSearchTerms(String.join(" ",
                 this.getTalentName()));
     }
-    
+
     public String getTalentWithYear() {
         StringBuilder sb = new StringBuilder();
         sb.append(talentName);
@@ -155,4 +157,31 @@ public class Talent extends DemoBean implements Comparable<Talent> {
     public int compareTo(Talent other) {
         return Utils.compareUsingCollator(this.getTalentName(), other.getTalentName());
     }
+
+    // Based on the PK of the underlying table:
+    @Override
+    public int hashCode() {
+        return new HashCodeBuilder(223, 271)
+                .append(talentID)
+                .toHashCode();
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (obj == null) {
+            return false;
+        }
+        if (obj == this) {
+            return true;
+        }
+        if (obj.getClass() != getClass()) {
+            return false;
+        }
+        Talent other = (Talent) obj;
+        return new EqualsBuilder()
+                .appendSuper(super.equals(obj))
+                .append(talentID, other.talentID)
+                .isEquals();
+    }
+    
 }

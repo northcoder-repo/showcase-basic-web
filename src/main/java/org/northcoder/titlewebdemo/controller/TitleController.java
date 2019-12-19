@@ -21,24 +21,24 @@ public class TitleController extends Controller {
         super();
     }
 
-    public static Handler fetchOne = (ctx) -> {
+    public static final Handler fetchOne = (ctx) -> {
         Title bindParams = new Title(ctx.pathParam(DB_KEY));
         DaoData<Title> daoData = fetchOneRecord(bindParams, Title.SQL_SELECT_BY_ID);
         ctx.render(SITE_TEMPLATE, buildFormModel(ctx, daoData));
     };
 
-    public static Handler fetchAll = (ctx) -> {
+    public static final Handler fetchAll = (ctx) -> {
         Title bindParams = new Title();
         DaoData<Title> daoData = fetchAllRecords(bindParams, Title.SQL_SELECT_ALL);
         ctx.render(SITE_TEMPLATE, buildTableModel(ctx, daoData));
     };
 
-    public static Handler updateOne = (ctx) -> {
+    public static final Handler updateOne = (ctx) -> {
         DaoData<Title> daoData = updateOneRecord(ctx.body(), Title.SQL_UPDATE_BY_ID,
                 new Title());
         if (daoData.getResultBean().getActionCompletedOK()) {
             // doing a post-redirect-get, this is the redirect:
-            ctx.redirect(String.format("%s?result=ok", ctx.path()),
+            ctx.redirect(String.format("%s?result=ok", ctx.path()), 
                 HttpStatus._303.getStatusCode());
         } else {
             // return original data with errors:

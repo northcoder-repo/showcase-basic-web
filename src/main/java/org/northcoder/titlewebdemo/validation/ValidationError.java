@@ -1,5 +1,7 @@
 package org.northcoder.titlewebdemo.validation;
 
+import java.util.Locale;
+
 /**
  * A convenience class for handling validation errors.
  */
@@ -39,7 +41,7 @@ public class ValidationError {
                 break;
             default:
                 msg = String.format("Unable to save this data as a valid %s", 
-                        dataType.toLowerCase());
+                        dataType.toLowerCase(Locale.getDefault()));
         }
         return msg;
     }

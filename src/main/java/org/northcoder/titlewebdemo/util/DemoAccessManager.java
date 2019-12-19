@@ -48,6 +48,4 @@ public class DemoAccessManager {
         return userRoles;
     }
 
-    private static void redirectToLogin(Context ctx) {
-    }
 }

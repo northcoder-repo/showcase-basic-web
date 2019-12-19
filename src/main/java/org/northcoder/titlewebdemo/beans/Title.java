@@ -15,6 +15,8 @@ import org.hibernate.validator.constraints.Range;
 import java.util.List;
 import java.util.ArrayList;
 import java.util.Arrays;
+import org.apache.commons.lang3.builder.EqualsBuilder;
+import org.apache.commons.lang3.builder.HashCodeBuilder;
 
 /**
  * IMDb movies, TV episodes, etc.
@@ -232,7 +234,7 @@ public class Title extends DemoBean implements Comparable<Title> {
 
     public String getDisplayTitle() {
         StringBuilder sb = new StringBuilder();
-        if (getSeriesDetails() != null && !getSeriesDetails().isBlank()) {
+        if (!getSeriesDetails().isBlank()) {
             sb.append(getSeriesDetails()).append(" - ");
         }
         sb.append(primaryTitle);
@@ -268,7 +270,7 @@ public class Title extends DemoBean implements Comparable<Title> {
     }
 
     public String getTitleWithYear() {
-        if (getDisplayYear() != null && !getDisplayYear().isBlank()) {
+        if (!getDisplayYear().isBlank()) {
             return String.format("%s (%s)", primaryTitle, getDisplayYear());
         } else {
             return primaryTitle;
@@ -304,6 +306,32 @@ public class Title extends DemoBean implements Comparable<Title> {
     @Override
     public int compareTo(Title other) {
         return Utils.compareUsingCollator(this.getOriginalTitle(), other.getOriginalTitle());
+    }
+    
+    // Based on the PK of the underlying table:
+    @Override
+    public int hashCode() {
+        return new HashCodeBuilder(59, 61)
+                .append(titleID)
+                .toHashCode();
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (obj == null) {
+            return false;
+        }
+        if (obj == this) {
+            return true;
+        }
+        if (obj.getClass() != getClass()) {
+            return false;
+        }
+        Title other = (Title) obj;
+        return new EqualsBuilder()
+                .appendSuper(super.equals(obj))
+                .append(titleID, other.titleID)
+                .isEquals();
     }
 
 }

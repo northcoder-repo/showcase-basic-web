@@ -3,6 +3,8 @@ package org.northcoder.titlewebdemo.beans;
 import com.google.gson.annotations.SerializedName;
 import java.util.Arrays;
 import java.util.List;
+import org.apache.commons.lang3.builder.EqualsBuilder;
+import org.apache.commons.lang3.builder.HashCodeBuilder;
 import org.jdbi.v3.core.mapper.reflect.ColumnName;
 import org.northcoder.titlewebdemo.util.Utils;
 
@@ -159,4 +161,35 @@ public class TalentInTitle extends DemoBean implements Comparable<TalentInTitle>
     public int compareTo(TalentInTitle other) {
         return this.getOrder().compareTo(other.getOrder());
     }
+    
+    // Based on the PK of the underlying Title Principal table:
+    @Override
+    public int hashCode() {
+        return new HashCodeBuilder(37, 79)
+                .append(titleID)
+                .append(talentID)
+                .append(order)
+                .toHashCode();
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (obj == null) {
+            return false;
+        }
+        if (obj == this) {
+            return true;
+        }
+        if (obj.getClass() != getClass()) {
+            return false;
+        }
+        TalentInTitle other = (TalentInTitle) obj;
+        return new EqualsBuilder()
+                .appendSuper(super.equals(obj))
+                .append(titleID, other.titleID)
+                .append(talentID, other.talentID)
+                .append(order, other.order)
+                .isEquals();
+    }
+    
 }

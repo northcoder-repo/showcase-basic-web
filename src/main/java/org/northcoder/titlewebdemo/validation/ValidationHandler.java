@@ -11,9 +11,11 @@ import javax.validation.Validator;
 import org.hibernate.validator.messageinterpolation.ResourceBundleMessageInterpolator;
 import org.hibernate.validator.resourceloading.PlatformResourceBundleLocator;
 import com.google.gson.Gson;
+import java.util.Locale;
 
 /**
- * Executes <a href="https://hibernate.org/validator/">Hibernate validation checks</a>.
+ * Executes <a href="https://hibernate.org/validator/">Hibernate validation
+ * checks</a>.
  */
 public class ValidationHandler {
 
@@ -52,7 +54,7 @@ public class ValidationHandler {
         } else {
             // Errors that do not tie back to one single field - e.g. "all or none" checks:
             return String.format("class-level-error", violation.getRootBeanClass()
-                    .getSimpleName().toLowerCase());
+                    .getSimpleName().toLowerCase(Locale.getDefault()));
         }
     }
 
