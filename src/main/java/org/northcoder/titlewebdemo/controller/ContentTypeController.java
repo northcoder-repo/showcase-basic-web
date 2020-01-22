@@ -1,6 +1,7 @@
 package org.northcoder.titlewebdemo.controller;
 
 import org.northcoder.titlewebdemo.beans.ContentType;
+import org.northcoder.titlewebdemo.dao.JdbiDAO;
 import java.util.List;
 
 /**
@@ -8,14 +9,13 @@ import java.util.List;
  */
 public class ContentTypeController extends Controller {
 
-    public ContentTypeController() {
-        super();
+    public ContentTypeController(JdbiDAO jdbiDAO) {
+        super(jdbiDAO);
     }
 
-    public static List<ContentType> fetchAll() {
-        DaoData<ContentType> daoData = fetchAllRecords(new ContentType(), 
-                ContentType.SQL_SELECT_ALL);
-        return daoData.getResultBeans();
+    public List<ContentType> fetchAll() {
+        return fetchAllRecords(new ContentType(), ContentType.SQL_SELECT_ALL)
+                .getResultBeans();
     }
 
 }

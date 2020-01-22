@@ -7,6 +7,8 @@ import org.northcoder.titlewebdemo.util.DemoTemplateEngine;
 import org.northcoder.titlewebdemo.util.LoggerUtils;
 import org.northcoder.titlewebdemo.controller.TitleController;
 import org.northcoder.titlewebdemo.controller.TalentController;
+import org.northcoder.titlewebdemo.dao.JdbiDAO;
+import org.northcoder.titlewebdemo.dao.JdbiDS;
 import static org.northcoder.titlewebdemo.Path.*; // e.g. _Title...
 import io.javalin.Javalin;
 import io.javalin.core.util.RouteOverviewPlugin;
@@ -28,14 +30,17 @@ public class DemoApp {
 
         app.routes(() -> {
             before(TRACK_SESSION);
-            get(TITLES, TitleController.fetchAll);
-            get(TALENTS, TalentController.fetchAll);
+            
+            JdbiDAO jdbiDAO = new JdbiDAO(JdbiDS.INST.getDS());
+            
+            get(TITLES, new TitleController(jdbiDAO).fetchAll);
+            get(TALENTS, new TalentController(jdbiDAO).fetchAll);
 
-            get(_Title.ROUTE, TitleController.fetchOne);
-            post(_Title.ROUTE, TitleController.updateOne);
+            get(_Title.ROUTE, new TitleController(jdbiDAO).fetchOne);
+            post(_Title.ROUTE, new TitleController(jdbiDAO).updateOne);
 
-            get(_Talent.ROUTE, TalentController.fetchOne);
-            post(_Talent.ROUTE, TalentController.updateOne);
+            get(_Talent.ROUTE, new TalentController(jdbiDAO).fetchOne);
+            post(_Talent.ROUTE, new TalentController(jdbiDAO).updateOne);
         });
     }
 

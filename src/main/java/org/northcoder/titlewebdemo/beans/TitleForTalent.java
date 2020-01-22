@@ -249,7 +249,6 @@ public class TitleForTalent extends DemoBean implements Comparable<TitleForTalen
         }
         TitleForTalent other = (TitleForTalent) obj;
         return new EqualsBuilder()
-                .appendSuper(super.equals(obj))
                 .append(talentID, other.talentID)
                 .append(titleID, other.titleID)
                 .append(startYear, other.startYear)

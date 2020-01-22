@@ -329,7 +329,6 @@ public class Title extends DemoBean implements Comparable<Title> {
         }
         Title other = (Title) obj;
         return new EqualsBuilder()
-                .appendSuper(super.equals(obj))
                 .append(titleID, other.titleID)
                 .isEquals();
     }

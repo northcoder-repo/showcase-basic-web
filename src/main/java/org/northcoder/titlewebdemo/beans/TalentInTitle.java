@@ -185,7 +185,6 @@ public class TalentInTitle extends DemoBean implements Comparable<TalentInTitle>
         }
         TalentInTitle other = (TalentInTitle) obj;
         return new EqualsBuilder()
-                .appendSuper(super.equals(obj))
                 .append(titleID, other.titleID)
                 .append(talentID, other.talentID)
                 .append(order, other.order)

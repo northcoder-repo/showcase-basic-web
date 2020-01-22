@@ -3,6 +3,8 @@ package org.northcoder.titlewebdemo.beans;
 import java.util.List;
 import java.util.ArrayList;
 import com.google.gson.GsonBuilder;
+import java.util.Objects;
+import org.apache.commons.lang3.builder.EqualsBuilder;
 import org.northcoder.titlewebdemo.validation.ValidationHandler;
 import org.northcoder.titlewebdemo.validation.ValidationError;
 

@@ -87,7 +87,6 @@ public class ContentType extends DemoBean implements Comparable<ContentType> {
         }
         ContentType other = (ContentType) obj;
         return new EqualsBuilder()
-                .appendSuper(super.equals(obj))
                 .append(contentTypeID, other.contentTypeID)
                 .isEquals();
     }

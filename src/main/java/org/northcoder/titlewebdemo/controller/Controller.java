@@ -2,8 +2,6 @@ package org.northcoder.titlewebdemo.controller;
 
 import org.northcoder.titlewebdemo.beans.DemoBean;
 import org.northcoder.titlewebdemo.dao.JdbiDAO;
-import org.northcoder.titlewebdemo.dao.JdbiDS;
-import org.jdbi.v3.core.Jdbi;
 import org.northcoder.titlewebdemo.util.Utils;
 
 /**
@@ -11,7 +9,11 @@ import org.northcoder.titlewebdemo.util.Utils;
  */
 public abstract class Controller {
 
-    private static final Jdbi JDBI = JdbiDS.INST.getDS();
+    private final JdbiDAO jdbiDAO;
+    
+    public Controller(JdbiDAO jdbiDAO) {
+        this.jdbiDAO = jdbiDAO;
+    }
 
     /**
      * Selects one record from the database, using the record's unique identifier
@@ -23,9 +25,9 @@ public abstract class Controller {
      * @param sql the select statement to be executed
      * @return the result set (expected to be a single bean)
      */
-    public static <T extends DemoBean> DaoData<T> fetchOneRecord(T bindParams, String sql) {
+    public <T extends DemoBean> DaoData<T> fetchOneRecord(T bindParams, String sql) {
         DaoData<T> daoData = new DaoData(bindParams, sql);
-        return new JdbiDAO(JDBI).selectRecord(daoData);
+        return jdbiDAO.selectRecord(daoData);
     }
 
     /**
@@ -37,9 +39,9 @@ public abstract class Controller {
      * @param sql the select statement
      * @return a collection of beans representing the SQL result set
      */
-    public static <T extends DemoBean> DaoData<T> fetchAllRecords(T bindParams, String sql) {
+    public <T extends DemoBean> DaoData<T> fetchAllRecords(T bindParams, String sql) {
         DaoData<T> daoData = new DaoData(bindParams, sql);
-        return new JdbiDAO(JDBI).selectRecords(daoData);
+        return jdbiDAO.selectRecords(daoData);
     }
 
     /**
@@ -55,7 +57,7 @@ public abstract class Controller {
      * or, the original form data plus error messages, if there were any form
      * validation errors or database errors.
      */
-    public static <T extends DemoBean> DaoData<T> updateOneRecord(String formBody,
+    public <T extends DemoBean> DaoData<T> updateOneRecord(String formBody,
             String updateSql, T bean) {
 
         // load data from the html form into the bean:
@@ -80,7 +82,7 @@ public abstract class Controller {
         }
 
         // there were no errors in the form - so now we can try to update the DB:
-        daoData = new JdbiDAO(JDBI).updateRecord(daoData);
+        daoData = jdbiDAO.updateRecord(daoData);
         if (daoData.getDbErrorMessage() != null) {
             // there was a DB constraint violation or other DB error:
             daoData.setResultBean(bindParams);

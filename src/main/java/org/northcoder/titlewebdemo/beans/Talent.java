@@ -179,7 +179,6 @@ public class Talent extends DemoBean implements Comparable<Talent> {
         }
         Talent other = (Talent) obj;
         return new EqualsBuilder()
-                .appendSuper(super.equals(obj))
                 .append(talentID, other.talentID)
                 .isEquals();
     }

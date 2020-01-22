@@ -9,29 +9,30 @@ import static org.northcoder.titlewebdemo.Path._MainTemplates.*;
 import static org.northcoder.titlewebdemo.Path._Talent.*;
 import org.northcoder.titlewebdemo.beans.Talent;
 import org.northcoder.titlewebdemo.beans.TitleForTalent;
+import org.northcoder.titlewebdemo.dao.JdbiDAO;
 
 /**
  * See the Talent bean.
  */
 public class TalentController extends Controller {
 
-    public TalentController() {
-        super();
+    public TalentController(JdbiDAO jdbiDAO) {
+        super(jdbiDAO);
     }
 
-    public static final Handler fetchOne = (ctx) -> {
+    public final Handler fetchOne = (ctx) -> {
         Talent bindParams = new Talent(ctx.pathParam(DB_KEY));
         DaoData<Talent> daoData = fetchOneRecord(bindParams, Talent.SQL_SELECT_BY_ID);
         ctx.render(SITE_TEMPLATE, buildFormModel(ctx, daoData));
     };
 
-    public static final Handler fetchAll = (ctx) -> {
+    public final Handler fetchAll = (ctx) -> {
         Talent bindParams = new Talent();
         DaoData<Talent> daoData = fetchAllRecords(bindParams, Talent.SQL_SELECT_ALL);
         ctx.render(SITE_TEMPLATE, buildTableModel(ctx, daoData));
     };
 
-    public static final Handler updateOne = (ctx) -> {
+    public final Handler updateOne = (ctx) -> {
         DaoData<Talent> daoData = updateOneRecord(ctx.body(), Talent.SQL_UPDATE_BY_ID,
                 new Talent());
         if (daoData.getResultBean().getActionCompletedOK()) {
@@ -43,7 +44,7 @@ public class TalentController extends Controller {
         ctx.render(SITE_TEMPLATE, buildFormModel(ctx, daoData));
     };
 
-    private static Map<String, Object> buildTableModel(Context ctx, DaoData<Talent> daoData) {
+    private Map<String, Object> buildTableModel(Context ctx, DaoData<Talent> daoData) {
         Map<String, Object> model = new HashMap<>();
         model.put("ctx", ctx);
         model.put("daoData", daoData);
@@ -56,7 +57,7 @@ public class TalentController extends Controller {
         return model;
     }
     
-    private static Map<String, Object> buildFormModel(Context ctx, DaoData<Talent> daoData) {
+    private Map<String, Object> buildFormModel(Context ctx, DaoData<Talent> daoData) {
         Map<String, Object> model = new HashMap<>();
         model.put("ctx", ctx);
         model.put("daoData", daoData);
@@ -75,14 +76,14 @@ public class TalentController extends Controller {
         return model;
     }
     
-    private static void addTitlesForTalent(DaoData<Talent> daoData) {
+    private void addTitlesForTalent(DaoData<Talent> daoData) {
         if (daoData.getResultBean() != null) {
             daoData.getResultBean().getTitleListForTalent()
                     .addAll(fetchTitleForTalent(daoData.getResultBean().getTalentID()));
         }
     }
 
-    protected static List<TitleForTalent> fetchTitleForTalent(String talentID) {
+    protected List<TitleForTalent> fetchTitleForTalent(String talentID) {
         DaoData<TitleForTalent> daoData = fetchAllRecords(new TitleForTalent(talentID), 
                 TitleForTalent.SQL_SELECT_ALL_BY_TALENT);
         return daoData.getResultBeans();
