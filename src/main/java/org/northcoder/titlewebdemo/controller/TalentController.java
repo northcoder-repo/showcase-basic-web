@@ -10,6 +10,7 @@ import static org.northcoder.titlewebdemo.Path._Talent.*;
 import org.northcoder.titlewebdemo.beans.Talent;
 import org.northcoder.titlewebdemo.beans.TitleForTalent;
 import org.northcoder.titlewebdemo.dao.JdbiDAO;
+import org.northcoder.titlewebdemo.util.HttpStatus;
 
 /**
  * See the Talent bean.
@@ -36,12 +37,13 @@ public class TalentController extends Controller {
         DaoData<Talent> daoData = updateOneRecord(ctx.body(), Talent.SQL_UPDATE_BY_ID,
                 new Talent());
         if (daoData.getResultBean().getActionCompletedOK()) {
-            // Safeguard: re-select the record, in case of additional DB-triggered updates:
-            Talent selectBindParams = new Talent(daoData.getResultBean().getTalentID());
-            daoData = fetchOneRecord(selectBindParams, Talent.SQL_SELECT_BY_ID);
-            daoData.getResultBean().setActionCompletedOK(true);
+            // doing a post-redirect-get, this is the redirect:
+            ctx.redirect(String.format("%s?result=ok", ctx.path()), 
+                HttpStatus._303.getStatusCode());
+        } else {
+            // return original data with errors:
+            ctx.render(SITE_TEMPLATE, buildFormModel(ctx, daoData));
         }
-        ctx.render(SITE_TEMPLATE, buildFormModel(ctx, daoData));
     };
 
     private Map<String, Object> buildTableModel(Context ctx, DaoData<Talent> daoData) {
