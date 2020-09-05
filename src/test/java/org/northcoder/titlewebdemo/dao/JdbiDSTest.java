@@ -40,11 +40,6 @@ public enum JdbiDSTest {
         String testPass = "sapass";
 
         try {
-            Class.forName("org.h2.Driver");
-        } catch (ClassNotFoundException ex) {
-            Logger.getLogger(JdbiDSTest.class.getName()).log(Level.SEVERE, null, ex);
-        }
-        try {
             conn = DriverManager.getConnection(testUrl, testUser, testPass);
         } catch (SQLException ex) {
             Logger.getLogger(JdbiDSTest.class.getName()).log(Level.SEVERE, null, ex);
