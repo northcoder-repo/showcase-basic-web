@@ -112,7 +112,7 @@
         <dependency>
             <groupId>com.h2database</groupId>
             <artifactId>h2</artifactId>
-            <version>1.4.200</version>
+            <version>1.4.202</version>
             <!-- would not typically use h2 db in production
             <scope>test</scope>
             -->
