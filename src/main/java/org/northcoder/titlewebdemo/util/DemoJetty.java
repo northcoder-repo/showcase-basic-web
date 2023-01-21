@@ -16,6 +16,13 @@ import org.eclipse.jetty.util.ssl.SslContextFactory;
 /**
  * Configuration of the embedded Jetty server is controlled here, including
  * activation of HTTPS and HTTP/2.
+ *
+ * -------------------------------------------------------------------------------------------
+ *
+ * WARNING - this is out-of-date. See https://northcoder.com/post/jetty-11-secure-connections/
+ *
+ * -------------------------------------------------------------------------------------------
+ *
  */
 public class DemoJetty {
 
